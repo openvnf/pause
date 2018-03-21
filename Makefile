@@ -35,6 +35,10 @@ clean:
 	rm -f $(BIN_PATH_IN)/$(PROJECT)
 	rmdir -p $(BIN_PATH_IN) 2> /dev/null || true
 
+git-release:
+	git tag -a v$(VERSION)
+	git push origin v$(VERSION)
+
 docker-build:
 	$(MAKE) PLATFORM=linux
 	$(MAKE) install DEST_DIR=$(BUILD_DIR_IMAGE) PREFIX=
