@@ -16,9 +16,9 @@ BIN_PATH_IN = $(BUILD_DIR)/bin
 all:
 	mkdir -p $(BIN_PATH_IN)
 	GOOS=$(PLATFORM) go build \
-		-ldflags "-X main.version=$(VERSION) \
-				  -X main.git_sha=$(GIT_SHA)" \
-		-o $(BIN_PATH_IN)/$(PROJECT) src/$(PROJECT).go
+            -ldflags "-X main.version=$(VERSION) \
+                      -X main.git_sha=$(GIT_SHA)" \
+            -o $(BIN_PATH_IN)/$(PROJECT) src/$(PROJECT).go
 
 run:
 	$(BIN_PATH_IN)/$(PROJECT)
