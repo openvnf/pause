@@ -24,21 +24,22 @@ func main() {
     }
 
     n := 1
+    var err error
     if len(os.Args) > 2 && os.Args[1] == "--number" {
-        num, err := strconv.Atoi(os.Args[2])
+        n, err = strconv.Atoi(os.Args[2])
         if err != nil {
             fmt.Println(Usage)
             os.Exit(2)
         }
-        n = num
     }
+
+    c := make(chan os.Signal, n)
+    signal.Notify(c, os.Interrupt,
+                     syscall.SIGTERM, syscall.SIGINT, syscall.SIGCHLD)
 
     for i := n; i > 0; i-- {
         fmt.Printf("I%s: Waiting for %d signal(s)...\n",
                    time.Now().UTC().Format(TsFormat), i)
-        c := make(chan os.Signal, 1)
-        signal.Notify(c, os.Interrupt,
-                         syscall.SIGTERM, syscall.SIGINT, syscall.SIGCHLD)
         <-c
     }
 
