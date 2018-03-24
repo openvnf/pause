@@ -1,7 +1,7 @@
 # Pause
 
-An executable that waits for any of SIGTERM, SIGINT or SIGCHLD signals and exits
-once received printing timestamp.
+An executable that waits for any of SIGTERM, SIGINT or SIGCHLD signals and
+exits. It could wait for any of these signals specified number of times.
 
 ## Build
 
@@ -17,7 +17,7 @@ $ make uninstall
 ```
 
 ```
-Usage: pause [version]
+Usage: pause [version] [--number N]
 ```
 
 To use as a Docker container:
