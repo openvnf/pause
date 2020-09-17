@@ -40,10 +40,7 @@ git-release:
 	git push origin v$(VERSION)
 
 docker-build:
-	$(MAKE) PLATFORM=linux
-	$(MAKE) install DEST_DIR=$(BUILD_DIR_IMAGE) PREFIX=
-	install -p -m 644 Dockerfile $(BUILD_DIR_IMAGE)
-	docker build $(BUILD_DIR_IMAGE) -t $(USER)/$(PROJECT):$(VERSION)
+	docker build . -t $(USER)/$(PROJECT):$(VERSION)
 	docker tag $(USER)/$(PROJECT):$(VERSION) $(USER)/$(PROJECT):edge
 
 docker-push:
@@ -53,10 +50,6 @@ docker-push:
 docker-release:
 	docker tag $(USER)/$(PROJECT):$(VERSION) $(USER)/$(PROJECT):latest
 	docker push $(USER)/$(PROJECT):latest
-
-docker-clean:
-	rm -f $(BUILD_DIR_IMAGE)/Dockerfile
-	$(MAKE) uninstall DEST_DIR=$(BUILD_DIR_IMAGE) PREFIX=
 
 docker-clean-dangling:
 	docker images -qf dangling=true | xargs docker rmi
