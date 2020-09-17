@@ -1,4 +1,4 @@
-USER = aialferov
+USER = openvnf
 PROJECT = pause
 
 VERSION = $(shell cat Version)
